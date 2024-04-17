@@ -8,4 +8,31 @@
 <body>
     
 </body>
+<script type="text/javascript">
+    let number = 18
+    let person = {
+        name:'张三',
+        sex:'男',
+    }
+
+    //主要讲这个方法(感觉与模型和数据的双向绑定有关)
+    Object.defineProperty(person,'age',{
+        //value:18,            //设置值
+        //enumerable:true,     //控制属性是否可以被枚举,默认是false
+        //writable:true,       //控制属性是否可以被修改,默认是false
+        //configurable:true,   //控制属性是否可以被删除,默认是false
+
+        //有代码获取age属性时触发get函数
+        get(){
+            console.log('有人读取age属性')
+            return number
+        },
+        //有代码修改age属性时触发set函数
+        set(value){
+            console.log('有人修改了age属性')
+            number = value
+        }
+
+    })
+</script>
 </html>
