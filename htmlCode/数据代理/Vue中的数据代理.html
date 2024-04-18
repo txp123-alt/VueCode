@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--通过VM对象代理来自data对象中属性的操作(读/写)-->
+    <!--好处: 方便操作data中的属性-->
+    <!--通过Object.definrProperty()方法，将data对象中的属性添加到VM对象上, 
+        并且为每一个添加到VM对象身上的属性都添加一个getter和setter属性，然后再getter和setter方法内部去操作data中相应的属性-->
+    <div id = "root">
+        <h1>姓名:{{name}}</h1>
+        <h1>地址:{{addr}}</h1>
+    </div>
+</body>
+
+<script type="text/javascript">
+    Vue.config.productionTip=false
+    new Vue({
+        el:'#root', 
+        data:{
+            name:"张山",
+            addr:"不告诉你"
+        }
+    })
+</script>
+
+</html>
