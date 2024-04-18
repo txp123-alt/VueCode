@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<style>
+    .demo1{
+        height: 50;
+        background-color: beige;
+    }
+    *{
+        margin-top: 20;
+    }
+    .box1{
+        padding: 5px;
+        background-color: aqua;
+    }
+    .box2{
+        padding: 5px;
+        background-color: orange;
+    }
+</style>
+<body>
+    <div id="root">
+        <!--Vue 常用的事件修饰符, 前三个常用-->
+        <!--prevevt 阻止默认事件-->
+        <!--stop    阻止事件冒泡-->
+        <!--once    事件只触发一次-->
+        <!--capture 使用事件的捕捉模式-->
+        <!--self    只有evevt.target是当前操作的元素时才触发事件-->
+        <!--passive 事件的默认行为立即执行, 无需等待事件回调执行完毕--><!--正常流程是，点击页面，执行函数，页面响应，添加了passive后，页面响应和函数同时执行-->
+        <h1>我是:{{name}}</h1>
+        <!--prevevt 阻止默认事件-->
+        <a href="http://wwww.atguigu.com" @click.prevent="showInfo">点我提示信息</a>
+        <!--stop    阻止事件冒泡-->
+        <div class="demo1" @click="showInfo">
+            <button @click.stop="showInfo">阻止事件冒泡</button>
+        </div>
+        <!--once    事件只触发一次-->
+        <button @click.once="showInfo">事件只触发一次</button>
+
+        <!--capture 使用事件的捕捉模式-->
+        <div class="box1" @click.capture="showMsg(1)">
+            div1
+            <div class="box2" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+        <!--self    只有evevt.target是当前操作的元素时才触发事件,也可以阻止事件冒泡-->
+        <div class="demo1" @click.self="showSelf">
+            <button @click="showSelf">阻止事件冒泡(self形式)</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            name:"张三丰",
+        },
+        methods:{
+            showInfo(event){
+                //阻止a标签跳转的默认行为
+                //event.preventDefault()
+                alert("这个是提示信息")
+            }, 
+            showMsg(msg){
+                alert(msg)
+            },
+            showSelf(event){
+                console.log(event.target)
+                alert("这个是提示信息")
+            }
+        }
+    })
+</script>
+</html>
