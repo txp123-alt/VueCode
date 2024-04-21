@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--监视属性 watch:
+        1. 当被监视的属性变化时, 回调函数自动调用，进行相关操作
+        2. 监视属性必须存在,才能进行监视
+        3. 监视的两种写法
+            1. new Vue时声明监控的属性
+            2. 通过 vm.$watch动态监视
+    -->
+    <div id="root">
+        <h1>数据状态：{{info}}</h1>
+        <button @click="changerStatus">切换状态</button>
+    </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false
+
+   const vm = new Vue({
+    el:'#root',
+    data:{
+        isHot:false
+    },
+    methods: {
+        changerStatus(){
+            this.isHot = !this.isHot
+        }
+    },
+    computed:{
+        info(){
+            return this.isHot ? '炎热' :'凉爽'
+        }
+    },
+    watch:{
+        //监测Data属性(写法1)
+        // isHot:{
+        //     immediate:true, // 初始化时调用一下
+        //     handler(newValue,oldValue){
+        //         console.log('isHot被修改了')
+        //         console.log('newValue:'+newValue)
+        //         console.log('oldValue:'+oldValue)
+        //     }
+        // },
+        //监测计算属性
+        info:{
+            handler(newValue,oldValue){
+                console.log('info被修改了')
+                console.log('newValue:'+newValue)
+                console.log('oldValue:'+oldValue)
+            }
+        }
+    }
+   })
+
+   //监视器第二种写法，用于创建vue对象后，动态添加监视功能(写法2)
+
+   vm.$watch('isHot',{
+    immediate:true, // 初始化时调用一下
+    handler(newValue,oldValue){
+        console.log('isHot被修改了')
+        console.log('newValue:'+newValue)
+        console.log('oldValue:'+oldValue)
+        }
+   })
+</script>
+</html>
