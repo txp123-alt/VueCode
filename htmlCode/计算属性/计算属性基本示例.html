@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--定义: 要用的属性不存在， 需要用现有的属性进行计算后得来-->
+    <!--原理：底层运用了Object.defineproperty()提供的getter和setter-->
+    <!--get函数什么时候执行?
+        1. 初次读取时会执行一次,
+        2. 当依赖的属性发生变化时执行一次-->
+    <!--优势： 与methods相比，内部有缓存机制，效率更高，调试也更加方便-->
+    <!--备注：
+        1.计算属性会直接出现在VM上，与data属性类似
+        2.如果计算属性要修改，那必须写set函数取响应修改-->
+    <div id="root">
+        姓名<input type="text" v-model="name"/>
+        地址<input type="text" v-model="addr"/>
+        <h1>计算属性:{{nameAddr}}</h1>
+    </div>
+    
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            name:'张三丰',
+            addr:'测试地址'
+        },
+        computed:{
+            nameAddr:{
+                get(){
+                    return this.name + '-' + this.addr
+                },
+                set(value){
+                    const arr = value.split('-')
+                    this.name = arr[0]
+                    this.addr = arr[1]
+                }
+            }
+        }
+    })
+</script>
+</html>
