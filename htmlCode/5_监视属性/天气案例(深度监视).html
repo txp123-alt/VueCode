@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!--
+        深度监视:
+            1. Vue中的watch默认不监视对象内部值的改变(默认只监视一层)
+            2. 配置 deep:true 可以开启对象内部属性的监测
+        备注:
+            1. Vue自身可以监测对象内部值的改变，但是Vue提供的watch默认只监视一层
+            2. 使用watch时，要看数据的具体结构, 决定是否开启深度监视
+        -->
+        <h1>数据状态：{{info}}</h1>
+        <button @click="changerStatus">切换状态</button>
+        <h1>a:{{numbers.a}}</h1>
+        <button @click="numbers.a++">a+1</button>
+        <h1>b:{{numbers.b}}</h1>
+        <button @click="numbers.b++">a+1</button>
+
+    </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false
+
+   const vm = new Vue({
+    el:'#root',
+    data:{
+        isHot:false,
+        numbers:{
+            a:1,
+            b:1
+        }
+    },
+    methods: {
+        changerStatus(){
+            this.isHot = !this.isHot
+        }
+    },
+    computed:{
+        info(){
+            return this.isHot ? '炎热' :'凉爽'
+        }
+    },
+    watch:{
+        //深度监测
+        numbers:{
+            deep:true,
+            handler(){
+                console.log('numbers发生变化')
+            }
+        },
+        //监测Data属性
+        isHot:{
+            //immediate:true, // 初始化时调用一下
+            handler(newValue,oldValue){
+                console.log('isHot被修改了')
+                console.log('newValue:'+newValue)
+                console.log('oldValue:'+oldValue)
+            }
+        },
+        //监测计算属性
+        info:{
+            handler(newValue,oldValue){
+                console.log('info被修改了')
+                console.log('newValue:'+newValue)
+                console.log('oldValue:'+oldValue)
+            }
+        }
+    }
+   })
+
+</script>
+</html>
