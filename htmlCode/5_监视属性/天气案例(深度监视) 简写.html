@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>数据状态：{{info}}</h1>
+        <button @click="changerStatus">切换状态</button>
+        <h1>a:{{numbers.a}}</h1>
+        <button @click="numbers.a++">a+1</button>
+        <h1>b:{{numbers.b}}</h1>
+        <button @click="numbers.b++">a+1</button>
+
+    </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false
+
+   const vm = new Vue({
+    el:'#root',
+    data:{
+        isHot:false,
+        numbers:{
+            a:1,
+            b:1
+        }
+    },
+    methods: {
+        changerStatus(){
+            this.isHot = !this.isHot
+        }
+    },
+    computed:{
+        info(){
+            return this.isHot ? '炎热' :'凉爽'
+        }
+    },
+    watch:{
+        //监测Data属性
+        // isHot:{
+        //     //deep:true, //深度监视
+        //     //immediate:true, // 初始化时调用一下
+        //     handler(newValue,oldValue){
+        //         console.log('isHot被修改了')
+        //         console.log('newValue:'+newValue)
+        //         console.log('oldValue:'+oldValue)
+        //     }
+        // }, 
+        //简写
+        // isHot(newValue,oldValue){
+        //     console.log('isHot被修改了')
+        // },
+    }
+   })
+   //正常写法
+//    vm.$watch('isHot',{
+//         deep:true,
+//         immediate:true,
+//         handler(newValue,oldValue){
+//                 console.log('isHot被修改了')
+//             }
+//    })
+    //简写
+    vm.$watch('isHot',function(newValue,oldValue){
+        console.log('isHot被修改了')
+    })
+
+</script>
+</html>
