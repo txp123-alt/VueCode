@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!--1.字符串写法, 适用于样式不确定，动态指定-->
+        <div class="base" :class="mood" @click="changeMood">
+            test
+        </div>
+        <!--2. 数组写法，适用于样式不确定，且个数也不确定-->
+        <div class="base" :class="classArr" @click="changeMood">
+            test
+        </div>
+        <!--3. 对象写法，适用于样式确定，且样式个数确定-->
+        <div class="base" :class="classObj" @click="changeMood">
+            test
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            mood:'normal',
+            classArr:['atguigu1','atguigu2','atguigu3'],
+            classObj:{
+                atguigu1:true,
+                atguigu2:true
+            }
+        },
+        methods: {
+            changeMood(){
+                //这里切换样式
+            }
+        },
+    })
+</script>
+</html>
