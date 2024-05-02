@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--
+        
+    -->
+    <div id="root">
+        n的初始值:<h2>{{n}}</h2>
+        n放大10倍后的值:<h2 v-big="n"></h2>
+        <button @click="n++">n++</button>
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            n:1
+        },
+        methods: {
+            
+        },
+        computed:{
+
+        },
+        watch:{
+            
+        },
+        directives:{
+            //enement当前指令所在元素的真是Dom, binding理解为当前指令所在的标签属性
+
+            //当前函数何时被调用？
+                //1.当初始化，指令与元素成功绑定时
+                //2.指令所在模版被重新解析时
+            big(enement,binding){
+                enement.innerText = binding.value*10
+            }
+        }
+    })
+</script>
+</html>

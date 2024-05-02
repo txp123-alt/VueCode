@@ -6,15 +6,22 @@
     <script type="text/javascript" src="../../vue_js/vue.js"></script>
 </head>
 <body>
+    <!--
+        v-once指令
+            1.v-once所在节点在初次渲染后，就被视为静态内容了
+            2.以后得数据改变不会影响到v-once所在节点结构的更新，可用于优化性能
+    -->
     <div id="root">
-
+        <h2 v-once>初始化的n值是:{{n}}</h2>
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="n++">点我n+1</button>
     </div>
 </body>
 <script type="text/javascript">
     const vm = new Vue({
         el:'#root',
         data:{
-
+            n:1
         },
         methods: {
             
@@ -23,9 +30,6 @@
 
         },
         watch:{
-            
-        },
-        directives:{
             
         }
     })

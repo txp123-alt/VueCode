@@ -4,17 +4,27 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script type="text/javascript" src="../../vue_js/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <!--
+        v-cloak指令:
+            1.本质是一个特殊的属性，vue创建完毕接管容器后，会删掉标签中v-cloak属性
+            2.使用css配合v-cloak属性可以解决网速慢时页面加载展示{{xxx}}的问题
+    -->
     <div id="root">
-
+        <h2 v-cloak>{{name}}</h2>
     </div>
 </body>
 <script type="text/javascript">
     const vm = new Vue({
         el:'#root',
         data:{
-
+            name:'尚硅谷'
         },
         methods: {
             
@@ -23,9 +33,6 @@
 
         },
         watch:{
-            
-        },
-        directives:{
             
         }
     })

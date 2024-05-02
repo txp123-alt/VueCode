@@ -6,15 +6,22 @@
     <script type="text/javascript" src="../../vue_js/vue.js"></script>
 </head>
 <body>
+    <!--
+        v-pre指令
+            1.跳过其所在节点的编译过程
+            2.可以用这个指令跳过没有指令的语法，加快编译速度
+    -->
     <div id="root">
-
+        <h2 v-pre>你好</h2>
+        <h2>当前的n值是：{{n}}</h2>
+        <button @click="n++">点我n+1</button>
     </div>
 </body>
 <script type="text/javascript">
     const vm = new Vue({
         el:'#root',
         data:{
-
+            n:1
         },
         methods: {
             
@@ -23,9 +30,6 @@
 
         },
         watch:{
-            
-        },
-        directives:{
             
         }
     })
