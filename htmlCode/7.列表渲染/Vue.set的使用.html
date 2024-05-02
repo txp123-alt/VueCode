@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="addAge">添加年龄</button>
+        <button @click="addSex">添加性别</button>
+        <h1>姓名：{{person.name}}</h1>
+        <h1 v-if="person.age">年龄:{{person.age}}</h1>
+        <h1 v-if="person.sex">性别:{{person.sex}}</h1>
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            person:{
+                id:'001',
+                name:'赵六'
+            }
+        },
+        methods: {
+            addAge(){
+                //这里的this值得是vm对象
+                this.$set(this.person,'age',20)
+            },
+            addSex(){
+                Vue.set(this.person,'sex','男')
+            }
+        },
+        computed:{
+
+        },
+        watch:{
+            
+        }
+    })
+
+</script>
+</html>
