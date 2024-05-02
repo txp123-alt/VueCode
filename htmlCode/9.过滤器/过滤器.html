@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+    <script type="text/javascript" src="../../vue_js/dayUtil.js"></script>
+</head>
+<body>
+    <!--
+        过滤器：
+            定义：要对显示的数据进行特定格式的优化处理后再展示(适用于一些简单逻辑)
+            语法：使用过滤器，{{xxx | 过滤器名}} 或 v-bind: 属性="xxx | 过滤器名"
+
+        备注：
+            1.过滤器可以接收参数，且多个过滤器可以串联
+            2.不会改变原有数据，只是生成新的数据
+                
+    -->
+    <div id="root">
+        <h1>当前时间戳：{{time}}</h1>
+        <h1>无参过滤器：{{time | timeFilter0}}</h1>
+        <h1>有参过滤器：{{time | timeFilter1('YYYY-MM-DD')}}</h1>
+        <h1>连续过滤器：{{time | timeFilter1('YYYY-MM-DD') | slicer}}</h1>
+        <h1>全局过滤器：{{time | myFilter}}</h1>
+        <button @click="getDay">111</button>
+    </div>
+</body>
+<script type="text/javascript">
+    //全局过滤器
+    Vue.filter('myFilter',function(value){
+        return value + '全局过滤器'
+    })
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            time:1714660660000,
+        },
+        methods: {
+            getDay(){
+                console.log(this)
+            }
+        },
+        computed:{
+
+        },
+        watch:{
+            
+        },
+        filters:{
+            timeFilter0(value){
+                return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+            },
+            timeFilter1(value,temp){
+                return dayjs(value).format(temp)
+            },
+            slicer(value){
+                return value.slice(0,4)
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--
+        收集表单数据
+        若：<input type="text"> 则v-model收集的数据是value值
+        若：<input type="radio"> 则v-model收集的数据是value值
+        若：<input type="checkbox"> 
+            1. 没有配置value属性时，收集的是checked(true/false)
+            2. 配置了value时
+                (1).v-model的初始值为非数组，那么收集的就是checked(true/false)
+                (2).v-model的初始值为数组，那么收集的就是value值
+       
+        v-model的三个修饰符
+            1.lazy:   失去焦点后收集数据
+            2.number：输入字符串转为有效数字
+            3.trim：  过滤输入字符串的首尾空格
+    -->
+    <div id="root">
+        <form @submit.prevent="demo">
+            <label for="demo0">账号：</label>
+            <input type="text" id="demo0" v-model.trim="account"/>
+            <br/>
+            <label for="demo1">密码：</label>
+            <input type="password" id="demo1" v-model="password">
+            <br/>
+            <br/>
+            性别：
+            男<input type="radio" name="sex" value="male" v-model="sex">
+            女<input type="radio" name="sex" value="female" v-model="sex">
+            <br/>
+            <br/>
+            <label for="demo1">年龄：</label>
+            <input type="number" id="demo2" v-model.number="age">
+            <br/>
+            <br/>
+            爱好：
+            抽烟<input type="checkbox" v-model="hobby" value="smoke">
+            喝酒<input type="checkbox" v-model="hobby" value="drunk">
+            烫头<input type="checkbox" v-model="hobby" value="hert">
+            <br/>
+            <br/>
+            所属校区：
+            <select v-model="school">
+                <option value="">请选择校区</option>
+                <option value="BJ">北京</option>
+                <option value="SH">上海</option>
+                <option value="XG">香港</option>
+            </select>
+            <br/>
+            <br/>
+            其他信息：
+            <textarea v-model.lazy="other"></textarea>
+            <br/>
+            <br/>
+            <input type="checkbox" v-model="aggre">
+            阅读并接受<a href="https://www.baidu.com">《用户协议》</a>
+            <br/>
+            <br/>
+            <button>提交</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            account:'',
+            password:'',
+            sex:'',
+            age:'',
+            hobby:[],
+            school:'',
+            other:'',
+            aggre:''
+        },
+        methods: {
+            demo(){
+                alert(1)
+                console.log("account："+this.account);
+                console.log("password："+this.password);
+                console.log("sex："+this.sex);
+                console.log("hobby："+this.hobby);
+                console.log("school："+this.school);
+                console.log("other："+this.other);
+                console.log("aggre："+this.aggre);
+            }
+        },
+        computed:{
+
+        },
+        watch:{
+            
+        }
+    })
+</script>
+</html>
