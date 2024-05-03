@@ -7,15 +7,62 @@
 </head>
 <body>
     <!--
-        
+        1.定义一个v-big指令，功能和v-text类似， 但是会把绑定的数值扩大10倍
+        2.定义一个v-fbind指令，功能和v-bind功能类似， 但是可以让其所绑定的input框自动获取焦点
+
+        自定义指令总结：
+            一.定义语法：
+                (1).局部指令：
+                    new Vue({                             
+                        directives：{指令名：配置对象}  
+                    })
+
+                或者
+                    new Vue({
+                        directives{指令名：回调函数}
+                    })
+               (2).全局指令：
+                    Vue.directive(指令名,配置对象)   或  Vue.directive(指令名,回调函数)
+
+            二.配置对象中常用的三个回调：
+                (1).bind:指令与元素成功绑定时调用
+                (2).inserted:指令所在元素被插入到页面时调用
+                (3).update:指令所在模版被重新解析时调用
+            
+            三.备注：
+                (1).指令配置时不加v-, 使用时加v-
+                (2).指令是多个单词时，使用-进行连接， 不能使用驼峰命名法
     -->
     <div id="root">
         n的初始值:<h2>{{n}}</h2>
         n放大10倍后的值:<h2 v-big="n"></h2>
         <button @click="n++">n++</button>
+
+        <br/>
+        <input v-fbind:value="n"/>
     </div>
 </body>
 <script type="text/javascript">
+    //全局定义
+    Vue.directive('fbind',{
+                //指令与元素成功绑定时
+                bind(enement,binding){
+                    enement.value = binding.value
+                },
+                //指令所在元素被插入到页面时
+                inserted(enement,binding){
+                    enement.focus()
+                },
+                //指令所在模版被重新解析时
+                update(enement,binding) {
+                    enement.value = binding.value
+                },
+            })
+     //全局定义       
+     Vue.directive('big',function(enement,binding){
+                enement.innerText = binding.value*10
+            })
+
     const vm = new Vue({
         el:'#root',
         data:{
@@ -36,9 +83,23 @@
             //当前函数何时被调用？
                 //1.当初始化，指令与元素成功绑定时
                 //2.指令所在模版被重新解析时
-            big(enement,binding){
-                enement.innerText = binding.value*10
-            }
+            // big(enement,binding){
+            //     enement.innerText = binding.value*10
+            // },
+            // fbind:{
+            //     //指令与元素成功绑定时
+            //     bind(enement,binding){
+            //         enement.value = binding.value
+            //     },
+            //     //指令所在元素被插入到页面时
+            //     inserted(enement,binding){
+            //         enement.focus()
+            //     },
+            //     //指令所在模版被重新解析时
+            //     update(enement,binding) {
+            //         enement.value = binding.value
+            //     },
+            // }
         }
     })
 </script>
