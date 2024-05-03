@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../../vue_js/vue.js"></script>
+</head>
+<body>
+    <!--
+        总结在下一个文档
+    -->
+    <div id="root">
+        <app></app>
+    </div>
+</body>
+<script type="text/javascript">
+
+    //定义学生组件
+    const student = Vue.extend({
+        template:`
+            <div>
+                <h2>姓名:{{name}}</h2>    
+                <h2>年龄:{{age}}</h2>   
+            </div>
+        `,
+        data(){
+            return {
+                name:'赵六',
+                age:10
+            }
+        }
+    })
+
+    //定义学校组件
+    const school = Vue.extend({
+        template:`
+            <div>
+                <h2>学校名称:{{schoolName}}</h2>    
+                <h2>学校地址:{{addr}}</h2> 
+                <student></student>  
+            </div>
+        `,
+        data(){
+            return{
+                schoolName:'XXX大学',
+                addr:'北京昌平'
+            }
+        },
+        components:{
+            student
+        }
+    })
+
+    //定义hello组件
+    const hello = Vue.extend({
+        template:`
+            <div>
+                <h2>hello组件</h2> 
+            </div>     
+        `
+    })
+
+    //定义app组件
+    const app = Vue.extend({
+        template:`
+            <div>
+                <hello></hello>
+                <school></school>
+            </div>
+        `,
+        components:{
+            hello,
+            school
+        }
+    })
+
+
+    const vm = new Vue({
+        el:'#root',
+        components:{
+            app,
+        },
+        data:{
+
+        },
+        methods: {
+            
+        },
+        computed:{
+
+        },
+        watch:{
+            
+        },
+        directives:{
+            
+        },
+        beforeCreate() {
+
+        },
+        created() {
+
+        },
+        beforeMount() {
+
+        },
+        mounted() {
+
+        },
+        beforeUpdate() {
+
+        },
+        updated() {
+
+        },
+        beforeDestroy() {
+            
+        },
+        destroyed() {
+            
+        },
+    })
+</script>
+</html>

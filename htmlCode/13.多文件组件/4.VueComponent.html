@@ -7,18 +7,27 @@
 </head>
 <body>
     <!--
-        生命周期：
-            1.别名：  生命周期函数，生命周期钩子
-            2.是什么: Vue在关键时间点调用的指定函数
-            3.注意：
-                (1)生命周期函数的名称不可以改，但是函数内部逻辑是程序员自己实现的
-                (2)生命周期函数中的this指向是VM 或组件实例对象
+        关于VueComponent(组件实例对象):
+            1.school组件本质上是名为VueComponent的构造函数，由Vue.extend(optyions)生成的
+            
+            2.我们只需要写<school></school>或<school/>,Vue解析时会帮我们创建school组件的实例对象(Vue 帮我们执行 new VueComponent(options))
+
+            3.每次调用Vue.extend(optyions)时，都会创建一个全新的VueComponent对象
+
+            4.关于this指向:
+                (1).组件配置中：
+                    data，methods，watch，computed，他们的this指向都是 VueComponent 实例对象
+                (2).new Vue(option)配置中：
+                    data，methods，watch，computed，他们的this指向都是 vm 实例对象
+        
+            5.VueComponent实例对象，以后简称 vc (组件实例对象)
     -->
     <div id="root">
-
+        <app></app>
     </div>
 </body>
 <script type="text/javascript">
+
     const vm = new Vue({
         el:'#root',
         components:{
